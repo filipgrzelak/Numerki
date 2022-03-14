@@ -26,4 +26,30 @@ public class Bisection {
             }
         }
     }
+
+    public static double findZeroPlace(List<Function> list, double leftCompartment, double rightCompartment, int numberOfOperation) {
+        double lCompartment = leftCompartment;
+        double rCompartment = rightCompartment;
+        double valueInTheLeftCompartment;
+        double valueInTheRightCompartment;
+        double middleOfCompartment = 0.0;
+        int counter = 0;
+
+        valueInTheLeftCompartment = Menu.countValueOfFunctions(lCompartment, list);
+        valueInTheRightCompartment = Menu.countValueOfFunctions(rCompartment, list);
+        if (valueInTheLeftCompartment * valueInTheRightCompartment > 0) {
+            throw new IllegalArgumentException("Brak miejsc zerowych");
+        }
+        while (counter < numberOfOperation) {
+            middleOfCompartment = (rCompartment + lCompartment) / 2;
+
+            if (Menu.countValueOfFunctions(middleOfCompartment, list) * Menu.countValueOfFunctions(lCompartment, list) < 0) {
+                rCompartment = middleOfCompartment;
+            } else {
+                lCompartment = middleOfCompartment;
+            }
+            counter++;
+        }
+        return middleOfCompartment;
+    }
 }

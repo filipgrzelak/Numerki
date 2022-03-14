@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class Menu {
     private Scanner scanner;
     private List<Function> objectList = new ArrayList<>();
-    double a = -5;
-    double b = 5;
+    double a = -1;
+    double b = 0.4;
     private ArrayList<Double> x = new ArrayList<>();
     private ArrayList<Double> y = new ArrayList<>();
 
@@ -31,11 +31,11 @@ public class Menu {
             JOptionPane.showMessageDialog(null, "Podano złą liczbę złożeń");
             System.out.println(e);
         }
-        System.out.println("Bisekcja: " + Bisection.findZeroPlace(objectList, -5, 5, 0.05));
-        System.out.println("Sieczna: " + Secant.findZeroPlace(-2, 2, objectList, 120, 0.05));
+        System.out.println("Bisekcja: " + Bisection.findZeroPlace(objectList, 0, 5, 0.05));
+        System.out.println("Sieczna: " + Secant.findZeroPlace(0, 2, objectList, 10));
         fillArrays();
         //TODO: add zero places here
-        Chart chart = new Chart("ApplicationTitle", "ChartTitle", x, y, null);
+        Chart chart = new Chart("ApplicationTitle", "ChartTitle", x, y, Bisection.findZeroPlace(objectList, 0, 5, 0.05));
         chart.pack();
         RefineryUtilities.centerFrameOnScreen(chart);
         chart.setVisible(true);

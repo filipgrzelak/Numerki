@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 public class Chart extends ApplicationFrame {
 
-    public Chart(String applicationTitle, String chartTitle, ArrayList<Double> x, ArrayList<Double> y, ArrayList<Double> zeroPlacesX) {
+    public Chart(String applicationTitle, String chartTitle, ArrayList<Double> x, ArrayList<Double> y, Double zeroPlacesX) {
         super(applicationTitle);
 
         JFreeChart xyLineChart = createChart(chartTitle, x, y);
@@ -25,11 +25,10 @@ public class Chart extends ApplicationFrame {
         chartPanel.setPreferredSize(new java.awt.Dimension( 560 , 367 ));
         final XYPlot plot = xyLineChart.getXYPlot();
 
-        for (Double place : zeroPlacesX) {
-            XYTextAnnotation  an = new XYTextAnnotation("⚫", place, 0);
-            an.setPaint(Color.BLACK);
-            plot.addAnnotation(an);
-        }
+
+        XYTextAnnotation  an = new XYTextAnnotation("⚫", zeroPlacesX, 0);
+        an.setPaint(Color.BLACK);
+        plot.addAnnotation(an);
 
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         renderer.setSeriesPaint(0,Color.RED);

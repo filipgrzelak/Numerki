@@ -1,11 +1,13 @@
 import javax.swing.*;
 import java.util.Scanner;
 
-public class Exponential implements Function{
+public class Exponential implements Function {
     private double coefficient;
+    private double freeWord;
 
     public Exponential() {
         coefficient = addValue("Podaj wartość współczynnika: ");
+        freeWord = addValue("Podaj wartość wyrazu wolnego: ");
     }
 
     public double addValue(String message) {
@@ -23,7 +25,7 @@ public class Exponential implements Function{
     }
 
     public double countValue(double x) {
-        return Math.pow(coefficient, x);
+        return Math.pow(coefficient, x) + freeWord;
     }
 
 }
