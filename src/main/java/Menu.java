@@ -34,7 +34,8 @@ public class Menu {
         System.out.println("Bisekcja: " + Bisection.findZeroPlace(objectList, -5, 5, 0.05));
         System.out.println("Sieczna: " + Secant.findZeroPlace(-2, 2, objectList, 120, 0.05));
         fillArrays();
-        Chart chart = new Chart("ApplicationTitle", "ChartTitle", x, y);
+        //TODO: add zero places here
+        Chart chart = new Chart("ApplicationTitle", "ChartTitle", x, y, null);
         chart.pack();
         RefineryUtilities.centerFrameOnScreen(chart);
         chart.setVisible(true);
