@@ -9,10 +9,12 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Chart extends ApplicationFrame {
 
-    public Chart(String applicationTitle, String chartTitle, double[] x, double[] y) {
+    public Chart(String applicationTitle, String chartTitle, ArrayList<Double> x, ArrayList<Double> y) {
         super(applicationTitle);
 
         JFreeChart xyLineChart = createChart(chartTitle, x, y);
@@ -30,12 +32,12 @@ public class Chart extends ApplicationFrame {
         setContentPane(chartPanel);
     }
 
-    private JFreeChart createChart(String chartTitle, double[] x, double[] y) {
+    private JFreeChart createChart(String chartTitle, ArrayList<Double> x, ArrayList<Double> y) {
         final XYSeries series = new XYSeries("XY");
         final XYSeriesCollection dataset = new XYSeriesCollection();
 
-        for (int i = 0; i < x.length; i++) {
-            series.add(x[i], y[i]);
+        for (int i = 0; i < x.size(); i++) {
+            series.add(x.get(i), y.get(i));
         }
         dataset.addSeries(series);
 
