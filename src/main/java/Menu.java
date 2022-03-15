@@ -25,6 +25,24 @@ public class Menu {
     }
 
     public void start() {
+        amountOfAssemblies();
+
+        setComparment();
+
+        setPoints();
+
+        lastStageAccuracyOrIterations();
+
+        System.out.println(bisectionValue);
+        System.out.println(secantValue);
+        fillArrays();
+        Chart chart = new Chart("ApplicationTitle", "ChartTitle", x, y, bisectionValue);
+        chart.pack();
+        RefineryUtilities.centerFrameOnScreen(chart);
+        chart.setVisible(true);
+    }
+
+    public void amountOfAssemblies() {
         boolean shouldContinue = true;
         while (shouldContinue) {
             System.out.print("Podaj liczbe złożeń: ");
@@ -39,25 +57,10 @@ public class Menu {
                 JOptionPane.showMessageDialog(null, "Podano złą liczbę złożeń");
             }
         }
-        shouldContinue = true;
+    }
 
-        while (shouldContinue) {
-            System.out.println();
-            try {
-                System.out.print("Podaj lewy koniec przedziału: ");
-                leftComparment = Double.parseDouble(scanner.nextLine());
-                System.out.println();
-                System.out.print("Podaj prawy koniec przedziału: ");
-                rightComparment = Double.parseDouble(scanner.nextLine());
-                shouldContinue = false;
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Podano nieprawidłową liczbę!");
-            }
-        }
-
-        shouldContinue = true;
-        setPoints();
-
+    public void lastStageAccuracyOrIterations() {
+        boolean shouldContinue = true;
         while (shouldContinue) {
             System.out.println();
             System.out.println("Wybierz metode zakończenia liczenia");
@@ -83,14 +86,24 @@ public class Menu {
 
             }
         }
-        System.out.println(bisectionValue);
-        System.out.println(secantValue);
-        fillArrays();
-        //TODO: add zero places here
-        Chart chart = new Chart("ApplicationTitle", "ChartTitle", x, y, bisectionValue);
-        chart.pack();
-        RefineryUtilities.centerFrameOnScreen(chart);
-        chart.setVisible(true);
+    }
+
+    public void setComparment() {
+        boolean shouldContinue = true;
+
+        while (shouldContinue) {
+            System.out.println();
+            try {
+                System.out.print("Podaj lewy koniec przedziału: ");
+                leftComparment = Double.parseDouble(scanner.nextLine());
+                System.out.println();
+                System.out.print("Podaj prawy koniec przedziału: ");
+                rightComparment = Double.parseDouble(scanner.nextLine());
+                shouldContinue = false;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Podano nieprawidłową liczbę!");
+            }
+        }
     }
 
     public void setPoints() {
