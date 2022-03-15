@@ -33,8 +33,8 @@ public class Menu {
 
         lastStageAccuracyOrIterations();
 
-        System.out.println(bisectionValue);
-        System.out.println(secantValue);
+        System.out.println("Bisekcja value: " + bisectionValue);
+        System.out.println("Sieczna value: " + secantValue);
         fillArrays();
         Chart chart = new Chart("ApplicationTitle", "ChartTitle", x, y, bisectionValue);
         chart.pack();
@@ -112,15 +112,15 @@ public class Menu {
         while (shouldContinue) {
             System.out.println();
             try {
-                System.out.print("Podaj lewy punkt/koniec przedziału: ");
+                System.out.print("Podaj pierwszy punkt: ");
                 fPoint = Double.parseDouble(scanner.nextLine());
-                if (!(fPoint > leftComparment && fPoint < rightComparment)) {
+                if (!(fPoint >= leftComparment && fPoint <= rightComparment)) {
                     throw new IllegalArgumentException("Punkt spoza przedziału");
                 }
                 System.out.println();
-                System.out.print("Podaj prawy punkt/koniec przedziału: ");
+                System.out.print("Podaj drugi punkt przedziału: ");
                 sPoint = Double.parseDouble(scanner.nextLine());
-                if (!(sPoint > leftComparment && sPoint < rightComparment)) {
+                if (!(sPoint >= leftComparment && sPoint <= rightComparment)) {
                     throw new IllegalArgumentException("Punkt spoza przedziału");
                 }
                 shouldContinue = false;

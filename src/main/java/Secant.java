@@ -40,6 +40,7 @@ public class Secant {
         double valueTwo;
         double nPoint;
         double nValue;
+        int counter = 0;
 
         valueOne = Menu.countValueOfFunctions(fPoint, list);
         valueTwo = Menu.countValueOfFunctions(secondPoint, list);
@@ -49,12 +50,14 @@ public class Secant {
         }
 
         while (true) {
+            counter++;
             if ((valueOne - valueTwo) == 0) {
                 throw new IllegalArgumentException("Dzielenie przez 0");
             }
             nPoint = (valueOne * sPoint - valueTwo * fPoint) / (valueOne - valueTwo);
             nValue = Menu.countValueOfFunctions(nPoint, list);
             if (Math.abs(nValue) < functionAccuracy) {
+                System.out.println("Sieczne iteracje: " + counter);
                 return nPoint;
             }
             fPoint = sPoint;
