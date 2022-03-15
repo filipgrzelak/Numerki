@@ -11,6 +11,8 @@ public class Menu {
     private List<Function> objectList = new ArrayList<>();
     double leftComparment;
     double rightComparment;
+    double fPoint = 0.0;
+    double sPoint = 0.0;
     double bisectionValue = 0.0;
     double secantValue = 0.0;
     double accuracy = 0.0;
@@ -42,10 +44,10 @@ public class Menu {
         while (shouldContinue) {
             System.out.println();
             try {
-                System.out.print("Podaj lewy punkt/koniec przedziału: ");
+                System.out.print("Podaj lewy koniec przedziału: ");
                 leftComparment = Double.parseDouble(scanner.nextLine());
                 System.out.println();
-                System.out.print("Podaj prawy punkt/koniec przedziału: ");
+                System.out.print("Podaj prawy koniec przedziału: ");
                 rightComparment = Double.parseDouble(scanner.nextLine());
                 shouldContinue = false;
             } catch (Exception e) {
@@ -54,7 +56,7 @@ public class Menu {
         }
 
         shouldContinue = true;
-
+        setPoints();
 
         while (shouldContinue) {
             System.out.println();
@@ -67,13 +69,13 @@ public class Menu {
                 case "1":
                     setAccuracy();
                     bisectionValue = Bisection.findZeroPlace(objectList, leftComparment, rightComparment, accuracy);
-                    secantValue = Secant.findZeroPlace(leftComparment, rightComparment, objectList, accuracy);
+                    secantValue = Secant.findZeroPlace(leftComparment, rightComparment, fPoint, sPoint, objectList, accuracy);
                     shouldContinue = false;
                     break;
                 case "2":
                     setAmountOfAproximations();
                     bisectionValue = Bisection.findZeroPlace(objectList, leftComparment, rightComparment, amountOfAproximations);
-                    secantValue = Secant.findZeroPlace(leftComparment, rightComparment, objectList, amountOfAproximations);
+                    secantValue = Secant.findZeroPlace(leftComparment, rightComparment, fPoint, sPoint, objectList, amountOfAproximations);
                     shouldContinue = false;
                     break;
                 default:
@@ -89,6 +91,30 @@ public class Menu {
         chart.pack();
         RefineryUtilities.centerFrameOnScreen(chart);
         chart.setVisible(true);
+    }
+
+    public void setPoints() {
+        boolean shouldContinue = true;
+
+        while (shouldContinue) {
+            System.out.println();
+            try {
+                System.out.print("Podaj lewy punkt/koniec przedziału: ");
+                fPoint = Double.parseDouble(scanner.nextLine());
+                if (!(fPoint > leftComparment && fPoint < rightComparment)) {
+                    throw new IllegalArgumentException("Punkt spoza przedziału");
+                }
+                System.out.println();
+                System.out.print("Podaj prawy punkt/koniec przedziału: ");
+                sPoint = Double.parseDouble(scanner.nextLine());
+                if (!(sPoint > leftComparment && sPoint < rightComparment)) {
+                    throw new IllegalArgumentException("Punkt spoza przedziału");
+                }
+                shouldContinue = false;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Podano nieprawidłową liczbę!");
+            }
+        }
     }
 
     public void setAccuracy() {
@@ -153,8 +179,8 @@ public class Menu {
     }
 
     public void fillArrays() {
-        double value = leftComparment;
-        while (value <= rightComparment) {
+        double value = -3.5;
+        while (value <= 1.5) {
             x.add(value);
             y.add(countValueOfFunctions(value, objectList));
             value += 0.05;
