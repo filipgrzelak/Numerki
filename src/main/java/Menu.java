@@ -9,8 +9,12 @@ import java.util.Scanner;
 public class Menu {
     private Scanner scanner;
     private List<Function> objectList = new ArrayList<>();
-    double a = -1;
-    double b = 0.4;
+    double leftComparment;
+    double rightComparment;
+    double bisectionValue = 0.0;
+    double secantValue = 0.0;
+    double accuracy = 0.0;
+    int amountOfAproximations = 0;
     private ArrayList<Double> x = new ArrayList<>();
     private ArrayList<Double> y = new ArrayList<>();
 
@@ -19,26 +23,104 @@ public class Menu {
     }
 
     public void start() {
+        boolean shouldContinue = true;
+        while (shouldContinue) {
+            System.out.print("Podaj liczbe złożeń: ");
+            String amountOfSubmission = scanner.nextLine();
 
-        System.out.print("Podaj liczbe złożeń: ");
-        String amountOfSubmission = scanner.nextLine();
-
-        try {
-            for (int i = 0; i < Integer.parseInt(amountOfSubmission); i++) {
-                submissionFunction();
+            try {
+                for (int i = 0; i < Integer.parseInt(amountOfSubmission); i++) {
+                    submissionFunction();
+                }
+                shouldContinue = false;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Podano złą liczbę złożeń");
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Podano złą liczbę złożeń");
-            System.out.println(e);
         }
-        System.out.println("Bisekcja: " + Bisection.findZeroPlace(objectList, 0, 5, 0.05));
-        System.out.println("Sieczna: " + Secant.findZeroPlace(0, 2, objectList, 10));
+        shouldContinue = true;
+
+        while (shouldContinue) {
+            System.out.println();
+            try {
+                System.out.print("Podaj lewy punkt/koniec przedziału: ");
+                leftComparment = Double.parseDouble(scanner.nextLine());
+                System.out.println();
+                System.out.print("Podaj prawy punkt/koniec przedziału: ");
+                rightComparment = Double.parseDouble(scanner.nextLine());
+                shouldContinue = false;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Podano nieprawidłową liczbę!");
+            }
+        }
+
+        shouldContinue = true;
+
+
+        while (shouldContinue) {
+            System.out.println();
+            System.out.println("Wybierz metode zakończenia liczenia");
+            System.out.println("1. Dokładność");
+            System.out.println("2. Ilość powtórzeń");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    setAccuracy();
+                    bisectionValue = Bisection.findZeroPlace(objectList, leftComparment, rightComparment, accuracy);
+                    secantValue = Secant.findZeroPlace(leftComparment, rightComparment, objectList, accuracy);
+                    shouldContinue = false;
+                    break;
+                case "2":
+                    setAmountOfAproximations();
+                    bisectionValue = Bisection.findZeroPlace(objectList, leftComparment, rightComparment, amountOfAproximations);
+                    secantValue = Secant.findZeroPlace(leftComparment, rightComparment, objectList, amountOfAproximations);
+                    shouldContinue = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Wybrano złą opcję!");
+
+            }
+        }
+        System.out.println(bisectionValue);
+        System.out.println(secantValue);
         fillArrays();
         //TODO: add zero places here
-        Chart chart = new Chart("ApplicationTitle", "ChartTitle", x, y, Bisection.findZeroPlace(objectList, 0, 5, 0.05));
+        Chart chart = new Chart("ApplicationTitle", "ChartTitle", x, y, bisectionValue);
         chart.pack();
         RefineryUtilities.centerFrameOnScreen(chart);
         chart.setVisible(true);
+    }
+
+    public void setAccuracy() {
+        boolean shouldContinue = true;
+
+        while (shouldContinue) {
+            System.out.println();
+            try {
+                System.out.print("Podaj dokładność: ");
+                accuracy = Double.parseDouble(scanner.nextLine());
+
+                shouldContinue = false;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Podano nieprawidłową liczbę!");
+            }
+        }
+    }
+
+    public void setAmountOfAproximations() {
+        boolean shouldContinue = true;
+
+        while (shouldContinue) {
+            System.out.println();
+            try {
+                System.out.print("Podaj liczbę aproksymacji: ");
+                amountOfAproximations = Integer.parseInt(scanner.nextLine());
+
+                shouldContinue = false;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Podano nieprawidłową liczbę!");
+            }
+        }
     }
 
     public void submissionFunction() {
@@ -71,8 +153,8 @@ public class Menu {
     }
 
     public void fillArrays() {
-        double value = a;
-        while (value <= b) {
+        double value = leftComparment;
+        while (value <= rightComparment) {
             x.add(value);
             y.add(countValueOfFunctions(value, objectList));
             value += 0.05;

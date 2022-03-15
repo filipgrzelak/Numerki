@@ -9,24 +9,23 @@ public class Secant {
         double valueTwo;
         double nPoint = 0.0;
         double nValue;
-        int n = amountOfApproximations;
-        double tempRemember = 0.0;
+        int n = 0;
 
         valueOne = Menu.countValueOfFunctions(fPoint, list);
         valueTwo = Menu.countValueOfFunctions(secondPoint, list);
 
-        while (n != 0) {
-            n--;
+        if ((valueOne - valueTwo) == 0) {
+            throw new IllegalArgumentException("Dzielenie przez 0");
+        }
+
+        while (n < amountOfApproximations) {
             nPoint = (valueOne * sPoint - valueTwo * fPoint) / (valueOne - valueTwo);
             nValue = Menu.countValueOfFunctions(nPoint, list);
             fPoint = sPoint;
             sPoint = nPoint;
             valueOne = valueTwo;
             valueTwo = nValue;
-            if (tempRemember == nPoint) {
-                return nPoint;
-            }
-            tempRemember = nPoint;
+            n++;
         }
         return nPoint;
     }
@@ -41,6 +40,10 @@ public class Secant {
 
         valueOne = Menu.countValueOfFunctions(fPoint, list);
         valueTwo = Menu.countValueOfFunctions(secondPoint, list);
+
+        if ((valueOne - valueTwo) == 0) {
+            throw new IllegalArgumentException("Dzielenie przez 0");
+        }
 
         while (true) {
             nPoint = (valueOne * sPoint - valueTwo * fPoint) / (valueOne - valueTwo);
