@@ -23,17 +23,13 @@ public class SystemOfEquations {
     }
 
     public void algorithm() {
-        boolean r = false;
         double accuracy = countAccuracy();
+
         for (int i = 0; i < tab.length - 1; i++) {
+            checkIfFirstEquationIsProperly(i, i);
             for (int j = i + 1; j < tab.length; j++) {
                 checkIfWeHaveSameEquations();
                 checkIfWeHaveSystemOfContradictoryEquations();
-                if (equations.get(i).getCoefficients().get(i) == 0) {
-                    Equation temp = equations.get(i);
-                    equations.remove(equations.get(i));
-                    equations.add(i + 1, temp);
-                }
                 if (Math.abs(equations.get(i).getCoefficients().get(j)) >= accuracy) {
                     double multiplier = -equations.get(j).getCoefficients().get(i) / equations.get(i).getCoefficients().get(i);
                     for (int k = i; k < tab.length + 1; k++) {
@@ -77,7 +73,21 @@ public class SystemOfEquations {
         return accuracy;
     }
 
-    public List<Equation> getEquations() {
+    public void checkIfFirstEquationIsProperly(int x, int y) {
+        boolean canChange = true;
+        if (Math.abs(equations.get(x).getCoefficients().get(y)) < countAccuracy()) {
+            for (int i = x + 1; i < equations.size(); i++) {
+                if (Math.abs(equations.get(i).getCoefficients().get(y)) > countAccuracy() && canChange) {
+                    Equation temp = equations.get(i);
+                    equations.set(i, equations.get(y));
+                    equations.set(y, temp);
+                    canChange = false;
+                }
+            }
+        }
+    }
+
+    public ArrayList<Equation> getEquations() {
         return equations;
     }
 
