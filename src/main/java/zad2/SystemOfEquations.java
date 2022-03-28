@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SystemOfEquations {
-    private List<Equation> equations = new ArrayList<>();
+    private ArrayList<Equation> equations = new ArrayList<>();
     private Double[] tab;
 
     public SystemOfEquations(String filename) {
@@ -27,6 +27,13 @@ public class SystemOfEquations {
         double accuracy = countAccuracy();
         for (int i = 0; i < tab.length - 1; i++) {
             for (int j = i + 1; j < tab.length; j++) {
+                checkIfWeHaveSameEquations();
+                checkIfWeHaveSystemOfContradictoryEquations();
+                if (equations.get(i).getCoefficients().get(i) == 0) {
+                    Equation temp = equations.get(i);
+                    equations.remove(equations.get(i));
+                    equations.add(i + 1, temp);
+                }
                 if (Math.abs(equations.get(i).getCoefficients().get(j)) < accuracy) {
                     return r;
                 }
@@ -37,6 +44,8 @@ public class SystemOfEquations {
                 }
             }
         }
+        checkIfWeHaveSameEquations();
+        checkIfWeHaveSystemOfContradictoryEquations();
         for (int i = tab.length - 1; i >= 0; i--) {
             double s = equations.get(i).getCoefficients().get(tab.length);
             for (int j = tab.length - 1; j >= i + 1; j--) {
@@ -50,12 +59,25 @@ public class SystemOfEquations {
         return true;
     }
 
+    public void checkIfWeHaveSameEquations() {
+        for (Equation equation : equations) {
+            if (equation.countValues() == 0) {
+                throw new IndefinityEquationException("Uklad nieoznaczony");
+            }
+        }
+    }
+
+    public void checkIfWeHaveSystemOfContradictoryEquations() {
+        for (Equation equation : equations) {
+            equation.checkSystemOfContradictoryEquations();
+        }
+    }
+
     public double countAccuracy() {
         double accuracy = 0.1;
         for (int i = 0; i < 8; i++) {
             accuracy *= accuracy;
         }
-        System.out.println(accuracy);
         return accuracy;
     }
 

@@ -31,6 +31,28 @@ public class Equation {
         return coefficients;
     }
 
+    public int countValues() {
+        int value = 0;
+        for (Double coefficient : coefficients) {
+            value += coefficient;
+        }
+        return value;
+    }
+
+    public int countValuesWithoutResult() {
+        int value = 0;
+        for (int i = 0; i < coefficients.size() - 1; i++) {
+            value += coefficients.get(i);
+        }
+        return value;
+    }
+
+    public void checkSystemOfContradictoryEquations() {
+        if (countValuesWithoutResult() == 0 && coefficients.get(coefficients.size() - 1) != 0) {
+            throw new SystemOfContrafictoryEquationsException("Uklad sprzeczny");
+        }
+    }
+
     @Override
     public String toString() {
         String line = "";

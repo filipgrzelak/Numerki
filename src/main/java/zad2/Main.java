@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        SystemOfEquations soe = new SystemOfEquations("test2.txt");
+        SystemOfEquations soe = new SystemOfEquations("sprzeczny2Test.txt");
         soe.algorithm();
         soe.printEquations();
         System.out.println(Arrays.asList(soe.getTab()));
