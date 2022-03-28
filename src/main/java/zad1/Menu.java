@@ -1,8 +1,9 @@
+package zad1;
+
 import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -168,7 +169,7 @@ public class Menu {
             System.out.println();
             System.out.println("Podaj rodzaj funkcji:");
             System.out.println("1.Wielomian");
-            System.out.println("2.Sinus");
+            System.out.println("2.zad1.Sinus");
             System.out.println("3.Wykładnicza");
             System.out.print("Wybór: ");
             String choice = scanner.nextLine();
