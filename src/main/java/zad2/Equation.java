@@ -31,24 +31,26 @@ public class Equation {
         return coefficients;
     }
 
-    public int countValues() {
-        int value = 0;
+    public double countValues() {
+        double value = 0;
         for (Double coefficient : coefficients) {
-            value += coefficient;
+            value += Math.abs(coefficient);
         }
         return value;
     }
 
-    public int countValuesWithoutResult() {
-        int value = 0;
+    public double countValuesWithoutResult() {
+
+        double value = 0;
         for (int i = 0; i < coefficients.size() - 1; i++) {
-            value += coefficients.get(i);
+            value += Math.abs(coefficients.get(i));
         }
         return value;
     }
 
     public void checkSystemOfContradictoryEquations() {
-        if (countValuesWithoutResult() == 0 && coefficients.get(coefficients.size() - 1) != 0) {
+        double accuracy = SystemOfEquations.countAccuracy();
+        if (countValuesWithoutResult() < accuracy && coefficients.get(coefficients.size() - 1) != 0) {
             throw new SystemOfContrafictoryEquationsException("Uklad sprzeczny");
         }
     }

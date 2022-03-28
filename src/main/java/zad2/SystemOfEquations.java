@@ -22,7 +22,7 @@ public class SystemOfEquations {
         }
     }
 
-    public boolean algorithm() {
+    public void algorithm() {
         boolean r = false;
         double accuracy = countAccuracy();
         for (int i = 0; i < tab.length - 1; i++) {
@@ -34,13 +34,11 @@ public class SystemOfEquations {
                     equations.remove(equations.get(i));
                     equations.add(i + 1, temp);
                 }
-                if (Math.abs(equations.get(i).getCoefficients().get(j)) < accuracy) {
-                    return r;
-                }
-                double multiplier = -equations.get(j).getCoefficients().get(i) / equations.get(i).getCoefficients().get(i);
-                for (int k = i; k < tab.length + 1; k++) {
-                    equations.get(j).getCoefficients().set(k, equations.get(j).getCoefficients().get(k) + multiplier * equations.get(i).getCoefficients().get(k));
-
+                if (Math.abs(equations.get(i).getCoefficients().get(j)) >= accuracy) {
+                    double multiplier = -equations.get(j).getCoefficients().get(i) / equations.get(i).getCoefficients().get(i);
+                    for (int k = i; k < tab.length + 1; k++) {
+                        equations.get(j).getCoefficients().set(k, equations.get(j).getCoefficients().get(k) + multiplier * equations.get(i).getCoefficients().get(k));
+                    }
                 }
             }
         }
@@ -49,19 +47,17 @@ public class SystemOfEquations {
         for (int i = tab.length - 1; i >= 0; i--) {
             double s = equations.get(i).getCoefficients().get(tab.length);
             for (int j = tab.length - 1; j >= i + 1; j--) {
-                s -= equations.get(i).getCoefficients().get(j) * tab[j];
-                if (Math.abs(equations.get(i).getCoefficients().get(j)) < countAccuracy()) {
-                    return r;
+                if (Math.abs(equations.get(i).getCoefficients().get(j)) >= countAccuracy()) {
+                    s -= equations.get(i).getCoefficients().get(j) * tab[j];
                 }
             }
             tab[i] = s / equations.get(i).getCoefficients().get(i);
         }
-        return true;
     }
 
     public void checkIfWeHaveSameEquations() {
         for (Equation equation : equations) {
-            if (equation.countValues() == 0) {
+            if (equation.countValues() < countAccuracy()) {
                 throw new IndefinityEquationException("Uklad nieoznaczony");
             }
         }
@@ -73,10 +69,10 @@ public class SystemOfEquations {
         }
     }
 
-    public double countAccuracy() {
-        double accuracy = 0.1;
-        for (int i = 0; i < 8; i++) {
-            accuracy *= accuracy;
+    public static double countAccuracy() {
+        double accuracy = 1;
+        for (int i = 0; i < 12; i++) {
+            accuracy /= 10;
         }
         return accuracy;
     }
