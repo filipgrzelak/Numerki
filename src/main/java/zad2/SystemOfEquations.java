@@ -36,6 +36,8 @@ public class SystemOfEquations {
                         equations.get(j).getCoefficients().set(k, equations.get(j).getCoefficients().get(k) + multiplier * equations.get(i).getCoefficients().get(k));
                     }
                 }
+                printEquations();
+                System.out.println();
             }
         }
         checkIfWeHaveSameEquations();
