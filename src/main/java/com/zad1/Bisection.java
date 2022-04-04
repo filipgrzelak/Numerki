@@ -1,4 +1,4 @@
-package zad1;
+package com.zad1;
 
 import java.util.List;
 

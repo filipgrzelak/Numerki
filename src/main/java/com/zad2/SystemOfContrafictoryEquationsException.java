@@ -1,4 +1,4 @@
-package zad2;
+package com.zad2;
 
 public class SystemOfContrafictoryEquationsException extends RuntimeException {
     public SystemOfContrafictoryEquationsException() {

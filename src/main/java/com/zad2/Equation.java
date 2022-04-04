@@ -1,11 +1,7 @@
-package zad2;
+package com.zad2;
 
-import zad1.Function;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Equation {
     private int amountOfVariables;

@@ -1,4 +1,4 @@
-package zad2;
+package com;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
