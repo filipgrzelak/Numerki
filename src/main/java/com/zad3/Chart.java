@@ -4,25 +4,17 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.annotations.XYTextAnnotation;
-import org.jfree.chart.axis.*;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.chart.ui.ApplicationFrame;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.DefaultXYDataset;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Chart extends JFrame {
 
-    public Chart(String title, ArrayList<Double> x, ArrayList<Double> y, ArrayList<Double> xNewton, ArrayList<Double> yNewton) {
+
+    public Chart(String title, ArrayList<Double> x, ArrayList<Double> y, ArrayList<Double> xNewton, ArrayList<Double> yNewton,ArrayList<Double> xPoints, ArrayList<Double> yPoints) {
         super(title);
         // Create dataset
         DefaultXYDataset dataset = createDataset(x, y, xNewton, yNewton);
@@ -33,6 +25,9 @@ public class Chart extends JFrame {
                 "y", // Y-Axis Label
                 dataset
         );
+        for (int i=0; i<xPoints.size(); i++) {
+            chart.getXYPlot().addAnnotation(new XYTextAnnotation("⚫",xPoints.get(i),yPoints.get(i)));
+        }
         ChartPanel panel = new ChartPanel(chart);
         setContentPane(panel);
     }

@@ -14,8 +14,8 @@ public class Menu {
     private double leftComparment;
     private double rightComparment;
     private double accuracy = 0.0;
-    private List<Double> knots = new ArrayList<>();
-    private List<Double> valuesForKnotsArguments = new ArrayList<>();
+    private ArrayList<Double> knots = new ArrayList<>();
+    private ArrayList<Double> valuesForKnotsArguments = new ArrayList<>();
     private ArrayList<Double> x = new ArrayList<>();
     private ArrayList<Double> y = new ArrayList<>();
     private ArrayList<Double> xNewton = new ArrayList<>();
@@ -37,7 +37,7 @@ public class Menu {
 
 
         SwingUtilities.invokeLater(() -> {
-            Chart example = new Chart("Line Chart Example", x, y, xNewton, yNewton);
+            Chart example = new Chart("Line Chart Example", x, y, xNewton, yNewton,knots,valuesForKnotsArguments);
             example.setAlwaysOnTop(true);
             example.pack();
             example.setSize(600, 400);
@@ -136,7 +136,7 @@ public class Menu {
         while (value <= rightComparment) {
             x.add(value);
             y.add(countValueOfFunctions(value, objectList));
-            value += 0.05;
+            value += 0.025;
         }
     }
 
@@ -145,7 +145,7 @@ public class Menu {
         while (value <= rightComparment) {
             x.add(value);
             y.add(newton.countValue(value));
-            value += 0.05;
+            value += 0.025;
         }
     }
 
