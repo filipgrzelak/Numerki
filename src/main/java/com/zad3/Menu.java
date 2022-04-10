@@ -31,15 +31,19 @@ public class Menu {
         amountOfAssemblies();
         setComparment();
         countValueForKnotsArguments();
-        Newton newton = new Newton(knots,valuesForKnotsArguments);
-        fillArrays(xNewton,yNewton,newton);
-        fillArrays(x,y);
+        Newton newton = new Newton(knots, valuesForKnotsArguments);
+        fillArrays(xNewton, yNewton, newton);
+        fillArrays(x, y);
 
 
-        Chart chart = new Chart("ApplicationTitle", "ChartTitle", x, y, xNewton,yNewton);
-        chart.pack();
-        RefineryUtilities.centerFrameOnScreen(chart);
-        chart.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            Chart example = new Chart("Line Chart Example", x, y, xNewton, yNewton);
+            example.setAlwaysOnTop(true);
+            example.pack();
+            example.setSize(600, 400);
+            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            example.setVisible(true);
+        });
     }
 
     public void amountOfAssemblies() {
@@ -136,7 +140,7 @@ public class Menu {
         }
     }
 
-    public void fillArrays(ArrayList<Double> x, ArrayList<Double> y,Newton newton) {
+    public void fillArrays(ArrayList<Double> x, ArrayList<Double> y, Newton newton) {
         double value = leftComparment;
         while (value <= rightComparment) {
             x.add(value);
