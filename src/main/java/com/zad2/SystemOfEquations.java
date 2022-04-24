@@ -1,4 +1,6 @@
-package zad2;
+package com.zad2;
+
+import com.LineReader;
 
 import java.util.ArrayList;
 import java.util.List;

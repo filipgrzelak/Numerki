@@ -1,4 +1,4 @@
-package zad1;
+package com.zad1;
 
 public class Sinus implements Function{
 

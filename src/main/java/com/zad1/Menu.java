@@ -1,4 +1,4 @@
-package zad1;
+package com.zad1;
 
 import org.jfree.ui.RefineryUtilities;
 
@@ -169,7 +169,7 @@ public class Menu {
             System.out.println();
             System.out.println("Podaj rodzaj funkcji:");
             System.out.println("1.Wielomian");
-            System.out.println("2.zad1.Sinus");
+            System.out.println("2.com.zad1.Sinus");
             System.out.println("3.Wykładnicza");
             System.out.print("Wybór: ");
             String choice = scanner.nextLine();

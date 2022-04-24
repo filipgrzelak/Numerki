@@ -1,4 +1,4 @@
-package zad1;
+package com.zad1;
 
 import javax.swing.*;
 import java.util.ArrayList;
