@@ -143,10 +143,10 @@ public class Menu {
         leftComparment = 0;
         rightComparment = 0.5;
         do {
-            temp = SimpsonIntegral(leftComparment, rightComparment); //calka
-            output += temp; //dodajemy ja do wyniku
-            leftComparment = rightComparment; //obieramy nowy poczatek przedzialu
-            rightComparment = rightComparment + ((1 - rightComparment) * 1 / 2); //obieramy nowy koniec przedzialu
+            temp = SimpsonIntegral(leftComparment, rightComparment);
+            output += temp;
+            leftComparment = rightComparment;
+            rightComparment = rightComparment + ((1 - rightComparment) * 1 / 2);
         } while (Math.abs(temp) > accuracy);
 
         //granica do -1
