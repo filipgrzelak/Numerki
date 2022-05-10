@@ -29,8 +29,8 @@ public class Menu {
     public void start() {
         amountOfAssemblies();
         setNumberOfNodes();
-        setCompartment();
         degreeOfPolynomial();
+        setCompartment();
 
         double epsilon = 0.0;
         double x, y;
@@ -119,7 +119,7 @@ public class Menu {
         while (shouldContinue) {
             System.out.println();
             try {
-                System.out.print("Podaj liczbę węzłów: ");
+                System.out.print("Podaj liczbę węzłów całkowania: ");
                 numberOfNodes = Integer.parseInt(scanner.nextLine());
 
                 shouldContinue = false;
@@ -135,7 +135,7 @@ public class Menu {
         while (shouldContinue) {
             System.out.println();
             try {
-                System.out.print("Podaj stopień wielomianu: ");
+                System.out.print("Podaj stopień wielomianu aproksymującego: ");
                 polynomialDegree = Integer.parseInt(scanner.nextLine());
 
                 shouldContinue = false;
