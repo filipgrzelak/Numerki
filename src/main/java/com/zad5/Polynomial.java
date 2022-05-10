@@ -51,23 +51,32 @@ public class Polynomial implements Function {
     }
 
     public double countValue(double x) {
-        double value = 0;
-        int counter = coefficients.size() - 1;
-        for (int i = 0; i <= degreeOfPolynomial; i++) {
-            value += countDegreeValue(i, x) * coefficients.get(counter);
-            counter--;
+        double value = coefficients.get(0);
+
+        for (int i = 1; i < coefficients.size(); i++) {
+            value = value * x + coefficients.get(i);
         }
+
         return value;
     }
 
-    private double countDegreeValue(int degree, double x) {
-        if (degree == 0) {
-            return 1;
-        }
-        double value = x;
-        for (int i = 1; i < degree; i++) {
-            value *= x;
-        }
-        return value;
-    }
+//    public double countValue(double x) {
+//        double value = 0;
+//        int counter = coefficients.size() - 1;
+//        for (int i = 0; i <= degreeOfPolynomial; i++) {
+//            value += countDegreeValue(i, x) * coefficients.get(counter);
+//            counter--;
+//        }
+//        return value;
+//    }
+
+//    private double countDegreeValue(int degree, double x) {
+//        if (degree == 0) {
+//            return 1;
+//        }
+//        double value = x;
+//        for (int i = 1; i < degree; i++) {
+//            value *= x;
+//        }
+//        return value;
 }
